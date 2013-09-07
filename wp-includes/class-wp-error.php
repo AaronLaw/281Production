@@ -70,7 +70,7 @@ class WP_Error {
 	 * @since 2.1.0
 	 * @access public
 	 *
-	 * @return array List of error codes, if available.
+	 * @return array List of error codes, if avaiable.
 	 */
 	function get_error_codes() {
 		if ( empty($this->errors) )
@@ -102,7 +102,7 @@ class WP_Error {
 	 * @since 2.1.0
 	 *
 	 * @param string|int $code Optional. Retrieve messages matching code, if exists.
-	 * @return array Error strings on success, or empty array on failure (if using code parameter).
+	 * @return array Error strings on success, or empty array on failure (if using codee parameter).
 	 */
 	function get_error_messages($code = '') {
 		// Return all messages if no code specified.
@@ -194,11 +194,13 @@ class WP_Error {
 /**
  * Check whether variable is a WordPress Error.
  *
- * Returns true if $thing is an object of the WP_Error class.
+ * Looks at the object and if a WP_Error class. Does not check to see if the
+ * parent is also WP_Error, so can't inherit WP_Error and still use this
+ * function.
  *
  * @since 2.1.0
  *
- * @param mixed $thing Check if unknown variable is a WP_Error object.
+ * @param mixed $thing Check if unknown variable is WordPress Error object.
  * @return bool True, if WP_Error. False, if not WP_Error.
  */
 function is_wp_error($thing) {
@@ -206,3 +208,5 @@ function is_wp_error($thing) {
 		return true;
 	return false;
 }
+
+?>

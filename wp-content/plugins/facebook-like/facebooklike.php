@@ -3,14 +3,13 @@
 Plugin Name: Facebook Like
 Plugin URI: http://wordpress.org/extend/plugins/facebook-like/
 Description: Like button in below post
-Version: 0.9.5
+Version: 0.9.1
 Author: Saturngod
 Author URI: http://en.saturngod.net
 */
 
 
 add_filter('the_content', 'add_post_footer');
-add_filter('the_excerpt', 'add_post_footer');
 
 if(is_admin()){	
     add_action('admin_menu', 'fblike_options');
@@ -38,13 +37,6 @@ function add_post_footer($text)
 	{
 		$showface="true";
 	}
-
-	$showsend="false";
-	if(get_option('fblike_showSend')==1)
-	{
-		$showsend="true";
-	}
-
 	$action=get_option('fblike_action');
 	$font=get_option('fblike_font');
 	$colorscheme=get_option('fblike_colorscheme');
@@ -74,7 +66,7 @@ function add_post_footer($text)
 			update_option('fblike_display_lang',"en_US");
 		}
 		
-		$iframe='<div style="height:'.$height.'px"><fb:like href="'.urlencode(get_permalink($post->ID)).'" layout="standard" send="'.$showsend.'" show_faces="'.$showface.'" width="'.$width.'" action="'.$action.'" colorscheme="'.$colorscheme.'" /></div>';
+		$iframe='<div style="height:'.$height.'px"><fb:like href="'.urlencode(get_permalink($post->ID)).'" layout="standard" show_faces="'.$showface.'" width="'.$width.'" action="'.$action.'" colorscheme="'.$colorscheme.'" /></div>';
 	}
 	else
 	{
@@ -126,19 +118,6 @@ function add_post_footer($text)
 		}
 		
 	}
-
-	if(is_category() && get_option('fblike_display_category') == '1')
-	{
-		if(get_option('fb_placein')=='top')
-		{
-			$text=$iframe.$text;
-		}
-		else
-		{
-			$text=$text.$iframe;
-		}
-		
-	}
 	
 	return $text;
 }
@@ -158,7 +137,6 @@ if(isset($_POST))
 		update_option('fblike_display_page',$_POST['fblike_display_page']);
 		update_option('fblike_display_front',$_POST['fblike_display_front']);
 		update_option('fblike_display_single',$_POST['fblike_display_single']);
-		update_option('fblike_display_category',$_POST['fblike_display_category']);
 		update_option('fb_appid',$_POST['fb_appid']);
 		update_option('fb_app_id',$_POST['fb_app_id']);
 		update_option('fb_width',$_POST['fb_width']);
@@ -166,8 +144,6 @@ if(isset($_POST))
 		
 		update_option('fb_placein',$_POST['placein']);
 		update_option('fblike_layout',$_POST['layout']);
-
-		update_option('fblike_showSend',$_POST['fblike_showSend']);
 		update_option('fblike_showfaces',$_POST['fblike_showfaces']);
 		update_option('fblike_action',$_POST['action']);
 		update_option('fblike_font',$_POST['font']);
@@ -209,13 +185,6 @@ if(isset($_POST))
 	                <input type="checkbox" value="1" <?php if (get_option('fblike_display_single') == '1') echo 'checked="checked"'; ?> name="fblike_display_single" id="fblike_display_single" group="fblike_display"/>
 	                
 	                                <label for="fblike_display_single">Display the button on the Single post page </label>
-	
-	            </p>
-			<p>
-	
-	                <input type="checkbox" value="1" <?php if (get_option('fblike_display_category') == '1') echo 'checked="checked"'; ?> name="fblike_display_category" id="fblike_display_category" group="fblike_display"/>
-	                
-	                                <label for="fblike_display_category">Display the button on the Category pages </label>
 	
 	            </p>
 				</td>
@@ -319,12 +288,7 @@ if(isset($_POST))
 				<p>
 					<input type="checkbox" value="1" <?php if (get_option('fblike_showfaces') == '1') echo 'checked="checked"'; ?> name="fblike_showfaces" id="fblike_showfaces" group="fblike_design"/>
 					
-				<label for="fblike_showfaces">Show Faces (only work with standard mode)</label>
-				</p>
-				<p>
-					<input type="checkbox" value="1" <?php if (get_option('fblike_showSend') == '1') echo 'checked="checked"'; ?> name="fblike_showSend" id="fblike_showSend" group="fblike_design"/>
-					
-				<label for="fblike_showSend">Show Send Button (only work with XFBML and standard mode)</label>
+				<label for="fblike_showfaces">Show Faces</label>
 				</p>
 				<p>
 					Verb to display<br/>
@@ -354,7 +318,7 @@ if(isset($_POST))
 				</td>
 			</tr>
 			<tr>
-				<td><strong>Preview (can't display for XFBML).</strong></td>
+				<td><strong>Preview</strong></td>
 				<td>
 					<?php
 					$layout=get_option('fblike_layout');
@@ -362,11 +326,6 @@ if(isset($_POST))
 					if(get_option('fblike_showfaces')==1)
 					{
 						$showface="true";
-					}
-					$showsend="false";
-					if(get_option('fblike_showSend')==1)
-					{
-						$showsend="true";
 					}
 					$action=get_option('fblike_action');
 					$font=get_option('fblike_font');
@@ -393,7 +352,7 @@ if(isset($_POST))
 					$appid=get_option('fb_appid');
 					if($appid!= "")
 					{
-						$iframe='<div style="height:'.$height.'px"><fb:like href="'.urlencode(get_bloginfo('url')).'" layout="standard" send="'.$showsend.'" show_faces="'.$showface.'" width="'.$width.'" action="'.$action.'" colorscheme="'.$colorscheme.'" /></div>';
+						$iframe='<div style="height:'.$height.'px"><fb:like href="'.urlencode(get_bloginfo('url')).'" layout="standard" show_faces="'.$showface.'" width="'.$width.'" action="'.$action.'" colorscheme="'.$colorscheme.'" /></div>';
 					}
 					else
 					{
@@ -429,14 +388,7 @@ $des=htmlentities($des,ENT_COMPAT,"UTF-8");
 ?>
 <script>
 jQuery(document).ready(function(){
-jQuery("html").attr("xmlns:og","http://opengraphprotocol.org/schema/");
-<?php
-if(get_option('fb_appid')!=""):
-?>
-jQuery("html").attr("xmlns:fb","http://ogp.me/ns/fb#");
-<?php
-endif;
-?>
+jQuery("html").attr("xmlns:og","http://opengraphprotocol.org/schema/")
 });
 </script>
 	<?php
@@ -474,13 +426,18 @@ endif;
 		if(get_option('fb_appid')!=""):
 	?>
 	 <div id="fb-root"></div>
-	<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?php echo get_option('fb_appid') ?>";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	 <script>
+	   window.fbAsyncInit = function() {
+	     FB.init({appId: '<?= get_option('fb_appid') ?>', status: true, cookie: true,
+	              xfbml: true});
+	   };
+	   (function() {
+	     var e = document.createElement('script'); e.async = true;
+	     e.src = document.location.protocol +
+	       '//connect.facebook.net/<?php echo get_option('fblike_display_lang') ?>/all.js';
+	     document.getElementById('fb-root').appendChild(e);
+	   }());
+	 </script>
 	<?php
 		endif;
 	}

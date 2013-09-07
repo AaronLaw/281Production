@@ -3,9 +3,9 @@
 ** Filters for Special Mail Tags
 **/
 
-add_filter( 'wpcf7_special_mail_tags', 'wpcf7_special_mail_tag', 10, 3 );
+add_filter( 'wpcf7_special_mail_tags', 'wpcf7_special_mail_tag', 10, 2 );
 
-function wpcf7_special_mail_tag( $output, $name, $html ) {
+function wpcf7_special_mail_tag( $output, $name ) {
 
 	// For backwards compat.
 	$name = preg_replace( '/^wpcf7\./', '_', $name );
@@ -13,18 +13,11 @@ function wpcf7_special_mail_tag( $output, $name, $html ) {
 	if ( '_remote_ip' == $name )
 		$output = preg_replace( '/[^0-9a-f.:, ]/', '', $_SERVER['REMOTE_ADDR'] );
 
-	elseif ( '_user_agent' == $name ) {
-		$output = substr( $_SERVER['HTTP_USER_AGENT'], 0, 254 );
-
-		if ( $html )
-			$output = esc_html( $output );
-	}
-
 	elseif ( '_url' == $name ) {
 		$url = untrailingslashit( home_url() );
 		$url = preg_replace( '%(?<!:|/)/.*$%', '', $url );
 		$url .= wpcf7_get_request_uri();
-		$output = esc_url( $url );
+		$output = $url;
 	}
 
 	elseif ( '_date' == $name )

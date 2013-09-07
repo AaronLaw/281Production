@@ -35,7 +35,7 @@
 					}
 					.expl {
 						margin: 18px 3px;
-						line-height: 140%;
+						line-height: 0.7em;
 					}
 					.expl a {
 						color: #da3114;

@@ -11,13 +11,9 @@ if ( typeof hs == "undefined" ) {
 //	var i = 0;
 //	showImg(i);
 
-		if ( jQuery.fn.lightBox ) {
-			jQuery('a[rel*=lightbox]').lightBox();
-			jQuery('.gallery1 a').lightBox({captionPosition:'gallery'});
-		} else if ( jQuery.fn.colorbox ) {
-			jQuery('a[rel*=lightbox]').colorbox();
-		}
+		jQuery('a[rel*=lightbox]').lightBox();
 		jQuery('.gallery a').tooltip({track:true, delay:0, showURL: false});
+		jQuery('.gallery1 a').lightBox({captionPosition:'gallery'});
 
 // Add these lines if you want to handle multiple galleries in one page.
 // You need to add into a [gallery] shorttag. ex) [gallery class="gallery2"] 

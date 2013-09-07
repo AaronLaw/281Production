@@ -6,9 +6,9 @@ Description: Wordpress Facebook Like Plugin - Add a Facebook "Like" Button to yo
 Donate link: http://allanjosephbatac.com/blog/
 Tags: facebook like plugin, wordpress facebook like, admin, custom, face book, Facebook, facebook like, Facebook like widget, Facebook Widget, fb, fb like, featured, featured posts, Like, page, plugin, Post, posts, wordpress like, facebook recommend, wordpress facebook recommend, facebook send button, facebook send
 Author: AJ Batac
-Version: 0.7
+Version: 0.4
 Requires at least: 2.0.2
-Tested up to: 3.5.1
+Tested up to: 3.1.2
 Stable tag: 9.9
 Author URI: http://allanjosephbatac.com/blog/
 */
@@ -30,7 +30,7 @@ if ( !function_exists('wp_fb_like_opt') )
 	<div class="wrap">
 	<div id="icon-themes" class="icon32"></div>
 	<h2><strong>Facebook "Like" Button Settings</strong></h2>
-	<span style="font-size:11px;color:#DE1186;"><strong>New!</strong> Now with the Facebook "Send" button option. Just enable the option below and save.</span>
+	<span style="font-size:11px;color:#DE1187;"><strong>New!</strong> Now with the Facebook "Send" button option. Just enable the option below and save.</span>
 	
 	<?php
 	if(isset($_POST['wp_fb_form_submit']))
@@ -78,10 +78,10 @@ if ( !function_exists('wp_fb_like_opt') )
 	<div class="description">The font of the plugin</div>
 	<select name="wp_fb_like_font" id="wp_fb_like_font">
 		<option value="arial" <?php if (get_option("wp_fb_like_font") == "arial") echo 'selected'; ?>>Arial</option>
-		<option value="lucida+grande" <?php if (get_option("wp_fb_like_font") == "lucida grande") echo 'selected'; ?>>Lucida Grande</option>
-		<option value="segoe+ui" <?php if (get_option("wp_fb_like_font") == "segoe ui") echo 'selected'; ?>>Segoe UI</option>
+		<option value="lucida+grande" <?php if (get_option("wp_fb_like_font") == "lucida+grande") echo 'selected'; ?>>Lucida Grande</option>
+		<option value="segoe+ui" <?php if (get_option("wp_fb_like_font") == "segoe+ui") echo 'selected'; ?>>Segoe UI</option>
 		<option value="tahoma" <?php if (get_option("wp_fb_like_font") == "tahoma") echo 'selected'; ?>>Tahoma</option>
-		<option value="trebuchet+ms" <?php if (get_option("wp_fb_like_font") == "trebuchet ms") echo 'selected'; ?>>Trebuchet MS</option>
+		<option value="trebuchet+ms" <?php if (get_option("wp_fb_like_font") == "trebuchet+ms") echo 'selected'; ?>>Trebuchet MS</option>
 		<option value="verdana" <?php if (get_option("wp_fb_like_font") == "verdana") echo 'selected'; ?>>Verdana</option>
 	</select>
 	
@@ -222,7 +222,7 @@ if( !function_exists('wp_fb_like_format') )
 			
 		$permalink = get_permalink();
 		
-		$output = '<div id="wp_fb_like_button" style="margin:'.$margin.';float:'.$align.';height:'.$height.'px;"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="'.$permalink.'" send="'.$fbsend.'" layout="'.$layout.'" width="'.$width.'" show_faces="'.$show_faces.'" font="'.$font.'" action="'.$action.'" colorscheme="'.$colorscheme.'"></fb:like></div>';
+		$output = '<div id="wp_fb_like_button" style="margin:'.$margin.';float:'.$align.';height:'.$height.'px;"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="'.rawurlencode($permalink).'" send="'.$fbsend.'" layout="'.$layout.'" width="'.$width.'" show_faces="'.$show_faces.'" font="'.$font.'" action="'.$action.'" colorscheme="'.$colorscheme.'"></fb:like></div>';
 		
 		return $output;
 	}

@@ -3,15 +3,15 @@ Contributors: saturngod
 Tags: facebook,like
 Requires at least: 2.6
 Tested up to: 3.2.1
-Stable tag: 0.9.5
+Stable tag: 0.9.1
 
 Facebook Like button in all post , page and front end. You can also setting.
 
 == Description ==
 
-Facebook Like button in all post , page and front end and category. You can change display at Setting > Facebook Like.
+Facebook Like button in all post , page and front end. You can also use setting. 
 
-Support XFBML with application ID. 
+Support XFBML with application ID. If you are using XFBML , it will conflict with Facebook share wordpress plugin and Facebook Fan Page old code.
 
 == Installation ==
 
@@ -37,11 +37,6 @@ send my mail saturngod {at} gmail dot com
 2. Like Button
 
 == Changelog ==
-
-=0.9.5=
-* show at category page by Joe Niland
-* add the_exceprt filer by Redazione di Tnd
-* added Send Button for XFBML
 
 =0.9=
 * add language field in setting page

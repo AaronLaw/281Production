@@ -24,13 +24,9 @@ function wp_print_scripts( $handles = false ) {
 		$handles = false;
 
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
-
+	if ( !is_a($wp_scripts, 'WP_Scripts') ) {
 		if ( !$handles )
-			return array(); // No need to instantiate if nothing is there.
+			return array(); // No need to instantiate if nothing's there.
 		else
 			$wp_scripts = new WP_Scripts();
 	}
@@ -39,24 +35,20 @@ function wp_print_scripts( $handles = false ) {
 }
 
 /**
- * Register new Javascript file.
+ * Register new JavaScript file.
  *
  * @since r16
  * @param string $handle Script name
  * @param string $src Script url
  * @param array $deps (optional) Array of script names on which this script depends
- * @param string|bool $ver (optional) Script version (used for cache busting), set to null to disable
+ * @param string|bool $ver (optional) Script version (used for cache busting), set to NULL to disable
  * @param bool $in_footer (optional) Whether to enqueue the script before </head> or before </body>
  * @return null
  */
 function wp_register_script( $handle, $src, $deps = array(), $ver = false, $in_footer = false ) {
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
 		$wp_scripts = new WP_Scripts();
-	}
 
 	$wp_scripts->add( $handle, $src, $deps, $ver );
 	if ( $in_footer )
@@ -64,34 +56,17 @@ function wp_register_script( $handle, $src, $deps = array(), $ver = false, $in_f
 }
 
 /**
- * Wrapper for $wp_scripts->localize().
+ * Localizes a script.
  *
- * Used to localize a script.
- * Works only if the script has already been added.
- * Accepts an associative array $l10n and creates JS object:
- * "$object_name" = {
- *   key: value,
- *   key: value,
- *   ...
- * }
- * See http://core.trac.wordpress.org/ticket/11520 for more information.
+ * Localizes only if script has already been added.
  *
  * @since r16
- *
- * @param string $handle The script handle that was registered or used in script-loader
- * @param string $object_name Name for the created JS object. This is passed directly so it should be qualified JS variable /[a-zA-Z0-9_]+/
- * @param array $l10n Associative PHP array containing the translated strings. HTML entities will be converted and the array will be JSON encoded.
- * @return bool Whether the localization was added successfully.
+ * @see WP_Scripts::localize()
  */
 function wp_localize_script( $handle, $object_name, $l10n ) {
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
-
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
 		return false;
-	}
 
 	return $wp_scripts->localize( $handle, $object_name, $l10n );
 }
@@ -104,32 +79,8 @@ function wp_localize_script( $handle, $object_name, $l10n ) {
  */
 function wp_deregister_script( $handle ) {
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
 		$wp_scripts = new WP_Scripts();
-	}
-
-	// Do not allow accidental or negligent deregistering of critical scripts in the admin. Show minimal remorse if the correct hook is used.
-	if ( is_admin() && 'admin_enqueue_scripts' !== current_filter() ) {
-		$no = array(
-			'jquery', 'jquery-core', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-accordion',
-			'jquery-ui-autocomplete', 'jquery-ui-button', 'jquery-ui-datepicker', 'jquery-ui-dialog',
-			'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-menu', 'jquery-ui-mouse',
-			'jquery-ui-position', 'jquery-ui-progressbar', 'jquery-ui-resizable', 'jquery-ui-selectable',
-			'jquery-ui-slider', 'jquery-ui-sortable', 'jquery-ui-spinner', 'jquery-ui-tabs',
-			'jquery-ui-tooltip', 'jquery-ui-widget',
-			'underscore', 'backbone',
-		);
-
-		if ( in_array( $handle, $no ) ) {
-			$message = sprintf( __( 'Do not deregister the %1$s script in the administration area. To target the frontend theme, use the %2$s hook.' ),
-				"<code>$handle</code>", '<code>wp_enqueue_scripts</code>' );
-			_doing_it_wrong( __FUNCTION__, $message, '3.6' );
-			return;
-		}
-	}
 
 	$wp_scripts->remove( $handle );
 }
@@ -144,12 +95,8 @@ function wp_deregister_script( $handle ) {
  */
 function wp_enqueue_script( $handle, $src = false, $deps = array(), $ver = false, $in_footer = false ) {
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
 		$wp_scripts = new WP_Scripts();
-	}
 
 	if ( $src ) {
 		$_handle = explode('?', $handle);
@@ -168,12 +115,8 @@ function wp_enqueue_script( $handle, $src = false, $deps = array(), $ver = false
  */
 function wp_dequeue_script( $handle ) {
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
 		$wp_scripts = new WP_Scripts();
-	}
 
 	$wp_scripts->dequeue( $handle );
 }
@@ -181,25 +124,24 @@ function wp_dequeue_script( $handle ) {
 /**
  * Check whether script has been added to WordPress Scripts.
  *
- * By default, checks if the script has been enqueued. You can also
- * pass 'registered' to $list, to see if the script is registered,
- * and you can check processing statuses with 'to_do' and 'done'.
+ * The values for list defaults to 'queue', which is the same as enqueue for
+ * scripts.
  *
  * @since WP unknown; BP unknown
  *
- * @param string $handle Name of the script.
- * @param string $list Optional. Defaults to 'enqueued'. Values are
- * 	'registered', 'enqueued' (or 'queue'), 'to_do', and 'done'.
- * @return bool Whether script is in the list.
+ * @param string $handle Handle used to add script.
+ * @param string $list Optional, defaults to 'queue'. Others values are 'registered', 'queue', 'done', 'to_do'
+ * @return bool
  */
-function wp_script_is( $handle, $list = 'enqueued' ) {
+function wp_script_is( $handle, $list = 'queue' ) {
 	global $wp_scripts;
-	if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
-		if ( ! did_action( 'init' ) )
-			_doing_it_wrong( __FUNCTION__, sprintf( __( 'Scripts and styles should not be registered or enqueued until the %1$s, %2$s, or %3$s hooks.' ),
-				'<code>wp_enqueue_scripts</code>', '<code>admin_enqueue_scripts</code>', '<code>login_enqueue_scripts</code>' ), '3.3' );
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
 		$wp_scripts = new WP_Scripts();
-	}
 
-	return (bool) $wp_scripts->query( $handle, $list );
+	$query = $wp_scripts->query( $handle, $list );
+
+	if ( is_object( $query ) )
+		return true;
+
+	return $query;
 }

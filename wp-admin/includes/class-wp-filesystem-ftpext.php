@@ -247,10 +247,6 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 		return false;
 	}
 	function mkdir($path, $chmod = false, $chown = false, $chgrp = false) {
-		$path = untrailingslashit($path);
-		if ( empty($path) )
-			return false;
-
 		if ( !@ftp_mkdir($this->link, $path) )
 			return false;
 		$this->chmod($path, $chmod);
@@ -330,10 +326,6 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 			}
 		}
 
-		// Replace symlinks formatted as "source -> target" with just the source name
-		if ( $b['islink'] )
-			$b['name'] = preg_replace( '/(\s*->\s*.*)$/', '', $b['name'] );
-
 		return $b;
 	}
 
@@ -346,7 +338,7 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 		}
 
 		$pwd = @ftp_pwd($this->link);
-		if ( ! @ftp_chdir($this->link, $path) ) // Cant change to folder = folder doesn't exist
+		if ( ! @ftp_chdir($this->link, $path) ) // Cant change to folder = folder doesnt exist
 			return false;
 		$list = @ftp_rawlist($this->link, '-a', false);
 		@ftp_chdir($this->link, $pwd);
@@ -391,3 +383,5 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 			ftp_close($this->link);
 	}
 }
+
+?>

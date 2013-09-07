@@ -2,54 +2,13 @@
 /*
 Plugin Name: Wordpress Video Plugin
 Plugin URI: http://www.daburna.de/blog/2006/12/13/wordpress-video-plugin/
-Description: The Wordpress Video Plugin adds a filter for WordPress that allows easy video embedding of 66 supported video sites. Enter [videosite id] at a post and you will see a video. For using the plugin, read the <a href="http://www.daburna.de/dokuwiki/doku.php/instruction" title="wordpress video plugin instruction">instruction page</a> or readme file!
-Version: 0.759
+Description: A filter for WordPress that displays videos from many video services. Enter [videosite id] at a post and you will see a video. For using the plugin, read the <a href="http://www.daburna.de/dokuwiki/doku.php/instruction" title="wordpress video plugin instruction">instruction page</a> or readme file!
+Version: 0.756
 Author: Oliver Wunder 
 Author URI: http://www.daburna.de/
-Text Domain: ow_wvp
-Domain Path: /lang
+
 
 */
-
-
-// Archive.org Code
-
-define("ARCHIVEORG_WIDTH", 640); // default width
-define("ARCHIVEORG_HEIGHT", 480); // default height
-define("ARCHIVEORG_REGEXP", "/\[archive ([[:print:]]+)\]/");
-define("ARCHIVEORG_TARGET", "<iframe src=\"http://archive.org/embed/###URL###\" width=\"###WIDTH###\" height=\"###HEIGHT###\" frameborder=\"0\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>");
-																																																																																												
-function archiveorg_plugin_callback($match)
-{
-	$tag_parts = explode(" ", rtrim($match[0], "]"));
-	$output = ARCHIVEORG_TARGET;
-	$output = str_replace("###URL###", $tag_parts[1], $output);
-	if (count($tag_parts) > 2) {
-		if ($tag_parts[2] == 0) {
-			$output = str_replace("###WIDTH###", ARCHIVEORG_WIDTH, $output);
-		} else {
-			$output = str_replace("###WIDTH###", $tag_parts[2], $output);
-		}
-		if ($tag_parts[3] == 0) {
-			$output = str_replace("###HEIGHT###", ARCHIVEORG_HEIGHT, $output);
-		} else {
-			$output = str_replace("###HEIGHT###", $tag_parts[3], $output);
-		}
-	} else {
-		$output = str_replace("###WIDTH###", ARCHIVEORG_WIDTH, $output);
-		$output = str_replace("###HEIGHT###", ARCHIVEORG_HEIGHT, $output);	
-	}
-	return ($output);
-}
-function archiveorg_plugin($content)
-{
-	return (preg_replace_callback(ARCHIVEORG_REGEXP, 'archiveorg_plugin_callback', $content));
-}
-
-add_filter('the_content', 'archiveorg_plugin');
-add_filter('the_content_feed', 'archiveorg_plugin');
-add_filter('comment_text', 'archiveorg_plugin');
-add_filter('the_excerpt', 'archiveorg_plugin');
 
 
 // MPORA Code
@@ -91,6 +50,8 @@ add_filter('the_content', 'mpora_plugin');
 add_filter('the_content_feed', 'mpora_plugin');
 add_filter('comment_text', 'mpora_plugin');
 add_filter('the_excerpt', 'mpora_plugin');
+
+
 
 // VZAAR Code
 
@@ -1110,7 +1071,7 @@ add_filter('the_excerpt', 'msn_plugin');
 define("YTPLAYLIST_WIDTH", 560); // default width
 define("YTPLAYLIST_HEIGHT", 315); // default height
 define("YTPLAYLIST_REGEXP", "/\[youtubeplaylist ([[:print:]]+)\]/");
-define("YTPLAYLIST_TARGET", "<iframe width=\"###WIDTH###\" height=\"###HEIGHT###\" src=\"http://www.youtube.com/embed/videoseries?list=PL###URL###&wmode=transparent\" frameborder=\"0\" allowfullscreen></iframe>");
+define("YTPLAYLIST_TARGET", "<iframe width=\"###WIDTH###\" height=\"###HEIGHT###\" src=\"http://www.youtube.com/embed/videoseries?list=PL###URL###\" frameborder=\"0\" allowfullscreen></iframe>");
 
 function ytplaylist_plugin_callback($match)
 {
@@ -1460,34 +1421,18 @@ add_filter('the_content_rss', 'sumotv_plugin');
 add_filter('comment_text', 'sumotv_plugin');
 add_filter('the_excerpt', 'sumotv_plugin');
 
-/// 123video.nl code
+// 123video.nl code
 
-define("VIDEONL_WIDTH", 608);
-define("VIDEONL_HEIGHT", 362);
+define("VIDEONL_WIDTH", 420);
+define("VIDEONL_HEIGHT", 339);
 define("VIDEONL_REGEXP", "/\[123videonl ([[:print:]]+)\]/");
-define("VIDEONL_TARGET", "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0\" id=\"123movie_###URL###\" width=\"###WIDTH###\" height=\"###HEIGHT###\"><param name=\"movie\" value=\"http://www.123video.nl/123videoPlayer.swf?mediaSrc=###URL###\" /><param name=\"quality\" value=\"high\" /><param name=\"allowScriptAccess\" value=\"always\"/> <param name=\"allowFullScreen\" value=\"true\"></param><embed src=\"http://www.123video.nl/123videoPlayer.swf?mediaSrc=###URL###\" quality=\"high\" width=\"###WIDTH###\" height=\"###HEIGHT###\" allowfullscreen=\"true\" type=\"application/x-shockwave-flash\"  allowscriptaccess=\"always\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" /></object>");
+define("VIDEONL_TARGET", "<object width=\"".VIDEONL_WIDTH."\" height=\"".VIDEONL_HEIGHT."\"><embed src=\"http://www.123video.nl/123video_share.swf?mediaSrc=###URL###\" type=\"application/x-shockwave-flash\" quality=\"high\" width=\"".VIDEONL_WIDTH."\" height=\"".VIDEONL_HEIGHT."\"></embed></object>");
 
 function videonl_plugin_callback($match)
 {
-	$tag_parts = explode(" ", rtrim($match[0], "]"));
-	$output = VIDEONL_TARGET;
-	$output = str_replace("###URL###", $tag_parts[1], $output);
-	if (count($tag_parts) > 2) {
-		if ($tag_parts[2] == 0) {
-			$output = str_replace("###WIDTH###", VIDEONL_WIDTH, $output);
-		} else {
-			$output = str_replace("###WIDTH###", $tag_parts[2], $output);
-		}
-		if ($tag_parts[3] == 0) {
-			$output = str_replace("###HEIGHT###", VIDEONL_HEIGHT, $output);
-		} else {
-			$output = str_replace("###HEIGHT###", $tag_parts[3], $output);
-		}
-	} else {
-		$output = str_replace("###WIDTH###", VIDEONL_WIDTH, $output);
-		$output = str_replace("###HEIGHT###", VIDEONL_HEIGHT, $output);	
-	}
-	return ($output);
+        $output = VIDEONL_TARGET;
+        $output = str_replace("###URL###", $match[1], $output);
+        return ($output);
 }
 
 function videonl_plugin($content)
@@ -1526,10 +1471,10 @@ add_filter('the_excerpt', 'brightcove_plugin');
 
 // Aniboom code
 
-define("ANIBOOM_WIDTH", 594);
-define("ANIBOOM_HEIGHT", 334);
+define("ANIBOOM_WIDTH", 448);
+define("ANIBOOM_HEIGHT", 372);
 define("ANIBOOM_REGEXP", "/\[aniboom ([[:print:]]+)\]/");
-define("ANIBOOM_TARGET", "<object width=\"".ANIBOOM_WIDTH."\" height=\"".ANIBOOM_HEIGHT."\"><param name=\"http://api.aniboom.com/e/###URL###\" /><param name=\"allowScriptAccess\" value=\"sameDomain\" /><param name=\"allowfullscreen\" value=\"true\" /><param name=\"quality\" value=\"high\" /><embed src=\"http://api.aniboom.com/e/###URL###\" quality=\"high\" width=\"".ANIBOOM_WIDTH."\" height=\"".ANIBOOM_HEIGHT."\" allowscriptaccess=\"sameDomain\" allowfullscreen=\"true\" type=\"application/x-shockwave-flash\"></embed></object>");
+define("ANIBOOM_TARGET", "<object width=\"".ANIBOOM_WIDTH."\" height=\"".ANIBOOM_HEIGHT."\"><param name=\"movie\" value=\"window\"></param><embed src=\"http://api.aniboom.com/embedded.swf?videoar=###URL###\" type=\"application/x-shockwave-flash\" quality=\"high\" width=\"".ANIBOOM_WIDTH."\" height=\"".ANIBOOM_HEIGHT."\"></embed></object>");
 
 function aniboom_plugin_callback($match)
 {
@@ -1903,8 +1848,8 @@ add_filter('the_excerpt', 'revver_plugin');
 define("BLIPTV_WIDTH", 480); 
 define("BLIPTV_HEIGHT", 299); 
 define("BLIPTV_REGEXP", "/\[bliptv ([[:print:]]+)\]/");
-define("BLIPTV_TARGET", "<iframe src=\"http://blip.tv/play/###URL###.html?p=1\" width=\"###WIDTH###\" height=\"###HEIGHT###\" frameborder=\"0\" allowfullscreen></iframe><embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf####URL###\" style=\"display:none\"></embed>");
-
+define("BLIPTV_TARGET", "<iframe src=\"http://blip.tv/play/###URL###.html\" width=\"###WIDTH###\" height=\"###HEIGHT###\" frameborder=\"0\" allowfullscreen></iframe><embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf####URL###\" style=\"display:none\"></embed>");
+																																																																										
 function bliptv_plugin_callback($match)
 {
 	$tag_parts = explode(" ", rtrim($match[0], "]"));
@@ -1965,7 +1910,7 @@ add_filter('the_excerpt', 'videotube_plugin');
 define("VIMEO_WIDTH", 400); // default width
 define("VIMEO_HEIGHT", 225); // default height
 define("VIMEO_REGEXP", "/\[vimeo ([[:print:]]+)\]/");
-define("VIMEO_TARGET", "<iframe src=\"http://player.vimeo.com/video/###URL###\" width=\"###WIDTH###\" height=\"###HEIGHT###\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
+define("VIMEO_TARGET", "<iframe src=\"http://player.vimeo.com/video/###URL###\" width=\"###WIDTH###\" height=\"###HEIGHT###\" frameborder=\"0\"></iframe>");
 
 function vimeo_plugin_callback($match)
 {
@@ -2047,7 +1992,7 @@ add_filter('the_excerpt', 'break_plugin');
 define("MYVIDEO_WIDTH", 470);
 define("MYVIDEO_HEIGHT", 406);
 define("MYVIDEO_REGEXP", "/\[myvideo ([[:print:]]+)\]/");
-define("MYVIDEO_TARGET", "<iframe src='http://www.myvideo.de/embed/###URL###' style='width:###WIDTH###px;height:###HEIGHT###px;border:0px none;padding:0;margin:0;' width='###WIDTH###' height='###HEIGHT###' frameborder='0' scrolling='no'></iframe>");
+define("MYVIDEO_TARGET", "<object style=\"width:###WIDTH###px;height:###HEIGHT###px;\" type=\"application/x-shockwave-flash\" data=\"http://www.myvideo.de/movie/###URL###\"> <param name=\"movie\" value=\"http://www.myvideo.de/movie/###URL###\" />	<param name=\"AllowFullscreen\" value=\"true\" /> </object>");
 
 function myvideo_plugin_callback($match)
 {
@@ -2086,7 +2031,7 @@ add_filter('the_excerpt', 'myvideo_plugin');
 define("DAILYMOTION_WIDTH", 420);
 define("DAILYMOTION_HEIGHT", 336);
 define("DAILYMOTION_REGEXP", "/\[dailymotion[:\s]([[:print:]]+)\]/");
-define("DAILYMOTION_TARGET", "<iframe frameborder=\"0\" width=\"###WIDTH###\" height=\"###HEIGHT###\" src=\"http://www.dailymotion.com/embed/video/###URL###\"></iframe>");
+define("DAILYMOTION_TARGET", "<object width=\"###WIDTH###\" height=\"###HEIGHT###\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/###URL###\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"always\" /><embed src=\"http://www.dailymotion.com/swf/###URL###\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"###WIDTH###\" height=\"###HEIGHT###\"></embed></object>");
 
 function dailymotion_plugin_callback($match) {
 	$tag_parts = explode(" ", rtrim($match[0], "]"));
@@ -2109,31 +2054,15 @@ add_filter('the_excerpt', 'dailymotion_plugin');
 
 // Sevenload Code
 
-define("SEVENLOAD_WIDTH", 500);
-define("SEVENLOAD_HEIGHT", 281);
+define("SEVENLOAD_WIDTH", 400);
+define("SEVENLOAD_HEIGHT", 258);
 define("SEVENLOAD_REGEXP", "/\[sevenload ([[:print:]]+)\]/");
-define("SEVENLOAD_TARGET", "<iframe src='http://embed.sevenload.com/widgets/singlePlayer/###URL###/?autoplay=false&env=slcom-ext' style='width:###WIDTH###px;height:###HEIGHT###px;overflow:hidden;border:0 solid #000;' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
+define("SEVENLOAD_TARGET", "<object type=\"application/x-shockwave-flash\" data=\"http://de.sevenload.com/pl/###URL###/".SEVENLOAD_WIDTH."x".SEVENLOAD_HEIGHT."/swf\" width=\"".SEVENLOAD_WIDTH."\" height=\"".SEVENLOAD_HEIGHT."\"><param name=\"allowFullscreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"always\" /><param name=\"movie\" value=\"http://de.sevenload.com/pl/###URL###/".SEVENLOAD_WIDTH."x".SEVENLOAD_HEIGHT."/swf\" /></object> ");
 
-function sevenload_plugin_callback($match)
-{
-	$tag_parts = explode(" ", rtrim($match[0], "]"));
+
+function sevenload_plugin_callback($match) {
 	$output = SEVENLOAD_TARGET;
-	$output = str_replace("###URL###", $tag_parts[1], $output);
-	if (count($tag_parts) > 2) {
-		if ($tag_parts[2] == 0) {
-			$output = str_replace("###WIDTH###", SEVENLOAD_WIDTH, $output);
-		} else {
-			$output = str_replace("###WIDTH###", $tag_parts[2], $output);
-		}
-		if ($tag_parts[3] == 0) {
-			$output = str_replace("###HEIGHT###", SEVENLOAD_HEIGHT, $output);
-		} else {
-			$output = str_replace("###HEIGHT###", $tag_parts[3], $output);
-		}
-	} else {
-		$output = str_replace("###WIDTH###", SEVENLOAD_WIDTH, $output);
-		$output = str_replace("###HEIGHT###", SEVENLOAD_HEIGHT, $output);	
-	}
+	$output = str_replace("###URL###", $match[1], $output);
 	return ($output);
 }
 
@@ -2214,7 +2143,7 @@ add_filter('the_excerpt', 'google_plugin');
 define("YOUTUBE_WIDTH", 425); // default width
 define("YOUTUBE_HEIGHT", 344); // default height
 define("YOUTUBE_REGEXP", "/\[youtube ([[:print:]]+)\]/");
-define("YOUTUBE_TARGET", "<iframe width=\"###WIDTH###\" height=\"###HEIGHT###\" src=\"http://www.youtube.com/embed/###URL###?wmode=transparent\" frameborder=\"0\" allowfullscreen> </iframe>");
+define("YOUTUBE_TARGET", "<iframe title=\"YouTube video player\" class=\"youtube-player\" type=\"text/html\" width=\"###WIDTH###\" height=\"###HEIGHT###\" src=\"http://www.youtube.com/embed/###URL###\" frameborder=\"0\" allowFullScreen=\"true\"> </iframe>");
 																																																																																												
 function youtube_plugin_callback($match)
 {
@@ -2247,25 +2176,25 @@ add_filter('the_content', 'youtube_plugin',1);
 add_filter('the_content_feed', 'youtube_plugin');
 add_filter('comment_text', 'youtube_plugin');
 add_filter('the_excerpt', 'youtube_plugin');
-add_filter('widget_text', 'youtube_plugin');
 
-load_plugin_textdomain('ow_wvp', false, basename( dirname( __FILE__ ) ) . '/lang' );
 
 function ow_wvp_option_page() {
 ?>
  
   <div class="wrap">
-    <h2><?php _e('Wordpress Video Plugin Options', ow_wvp); ?></h2>
+    <h2>Wordpress Video Plugin Options</h2>
     <p>
-		<?php _e('Thank you for using Wordpress Video Plugin!', ow_wvp); ?> 
+		Thank you for using Wordpress Video Plugin! 
     </p>
-    <p><?php _e('This is a first implementation of an option page to configurate the Wordpress Video Plugin. Until now you can not configure anything from here. But in the future
-    it is planed to configure size and other features.', ow_wvp); ?></p>
-    <h2><?php _e('Usage', ow_wvp); ?></h2>
-    <p><?php _e('Every occurence of the expression [site id] (case unsensitive) will start as an embedded flash player. Replace \'site\' with the name of the videosite and \'id\' with the video id. Visit this page for supported video sites: <a href="http://daburna.de/dokuwiki/doku.php/instruction">Instructions</a>', ow_wvp); ?></p>
+    <p>This is a first implementation of an option page to configurate the Wordpress Video Plugin. Until now you can not configure anything from here. But in the future
+    it is planed to configure size and other features.</p>
+    <h2>Usage</h2>
+    <p>Every occurence of the expression [site id] (case unsensitive) will start as an embedded flash player. 
+    Replace 'site' with the name of the videosite and 'id' with the video id.
+    Visit this page for supported video sites: <a href="http://daburna.de/dokuwiki/doku.php/instruction">Instructions</a>.</p>
  	<div style="width:300px;">
-	<strong><?php _e('Donate', ow_wvp); ?></strong>
-	<p><?php _e('If you like Wordpress Video Plugin, you can support its development by a donation:', ow_wvp); ?></p>
+	<strong>Donate</strong>
+	<p>If you like Wordpress Video Plugin, you can support its development by a donation:</p>
 	<div style="text-align:center;">
 <script type="text/javascript">
 	var flattr_url = 'http://www.daburna.de/blog/2006/12/13/wordpress-video-plugin/';
@@ -2281,7 +2210,7 @@ function ow_wvp_option_page() {
 </form>
 	</div>
 	<div>
-		<a href="http://www.amazon.de/wishlist/2X4I7LCHMRFWI/"><?php _e('My Amazon.de wishlist (German)', ow_wvp); ?></a>
+		<a href="http://www.amazon.de/wishlist/2X4I7LCHMRFWI/">My Amazon.de wishlist (German)</a>
 	</div>
 	</div>   
   </div>

@@ -5,9 +5,9 @@ Description: Wordpress Facebook Like Plugin - Add a Facebook "Like" Button to yo
 Donate link: http://allanjosephbatac.com/blog/
 Tags: facebook like plugin, wordpress facebook like, admin, custom, face book, Facebook, facebook like, Facebook like widget, Facebook Widget, fb, fb like, featured, featured posts, Like, page, plugin, Post, posts, wordpress like, facebook recommend, wordpress facebook recommend, facebook send button, facebook send
 Author: AJ Batac
-Version: 0.7
+Version: 0.4
 Requires at least: 2.0.2
-Tested up to: 3.5.1
+Tested up to: 3.1.2
 Stable tag: 9.9
 Author URI: http://allanjosephbatac.com/blog/
 
@@ -57,18 +57,6 @@ Facebook has this space to show faces of Facebook members who liked your post or
 Follow me at Twitter @ajbatac or send me a mention. I'll reply as soon as I get it.
 
 == Changelog ==
-
-= 0.6 =
-
-- Minor change. Removed + from the spaces which causes an error on the font usage
-
-= 0.6 =
-
-- Minor change. Added a banner
-
-= 0.5 =
-
-- Fixed error. Caused by changes on FB URL spec
 
 = 0.4 =
 

@@ -2,7 +2,7 @@
 /**
  * Class for a set of entries for translation and their associated headers
  *
- * @version $Id: translations.php 718 2012-10-31 00:32:02Z nbachiyski $
+ * @version $Id: translations.php 406 2010-02-07 11:10:24Z nbachiyski $
  * @package pomo
  * @subpackage translations
  */
@@ -30,19 +30,6 @@ class Translations {
 		return true;
 	}
 
-	function add_entry_or_merge($entry) {
-		if (is_array($entry)) {
-			$entry = new Translation_Entry($entry);
-		}
-		$key = $entry->key();
-		if (false === $key) return false;
-		if (isset($this->entries[$key]))
-			$this->entries[$key]->merge_with($entry);
-		else
-			$this->entries[$key] = &$entry;
-		return true;
-	}
-
 	/**
 	 * Sets $header PO header to $value
 	 *
@@ -57,7 +44,7 @@ class Translations {
 		$this->headers[$header] = $value;
 	}
 
-	function set_headers($headers) {
+	function set_headers(&$headers) {
 		foreach($headers as $header => $value) {
 			$this->set_header($header, $value);
 		}
@@ -81,7 +68,7 @@ class Translations {
 	/**
 	 * Given the number of items, returns the 0-based index of the plural form to use
 	 *
-	 * Here, in the base Translations class, the common logic for English is implemented:
+	 * Here, in the base Translations class, the commong logic for English is implmented:
 	 * 	0 if there is one element, 1 otherwise
 	 *
 	 * This function should be overrided by the sub-classes. For example MO/PO can derive the logic
@@ -121,20 +108,11 @@ class Translations {
 			$this->entries[$entry->key()] = $entry;
 		}
 	}
-
-	function merge_originals_with(&$other) {
-		foreach( $other->entries as $entry ) {
-			if ( !isset( $this->entries[$entry->key()] ) )
-				$this->entries[$entry->key()] = $entry;
-			else
-				$this->entries[$entry->key()]->merge_with($entry);
-		}
-	}
 }
 
 class Gettext_Translations extends Translations {
 	/**
-	 * The gettext implementation of select_plural_form.
+	 * The gettext implmentation of select_plural_form.
 	 *
 	 * It lives in this class, because there are more than one descendand, which will use it and
 	 * they can't share it effectively.
@@ -242,7 +220,7 @@ class NOOP_Translations {
 	function set_header($header, $value) {
 	}
 
-	function set_headers($headers) {
+	function set_headers(&$headers) {
 	}
 
 	function get_header($header) {

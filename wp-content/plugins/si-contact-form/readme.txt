@@ -2,18 +2,18 @@
 Contributors: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: http://www.FastSecureContactForm.com/donate
-Tags: Akismet, captcha, contact, contact form, form, mail, email, spam, multilingual, wpmu
-Requires at least: 3.4.2
-Tested up to: 3.5.2
+Tags: Akismet, captcha, contact, contact form, form, mail, email, spam, multilingual, wpmu, buddypress
+Requires at least: 2.8
+Tested up to: 3.2.1
 Stable tag: trunk
 
 A super customizable contact form that lets your visitors send you email. Blocks all automated spammers. No templates to mess with.
 
 == Description ==
 
-This plugin allows a webmaster to easily create and add contact forms to WordPress. The contact form will let the user send emails to a site's admin, and also send a meeting request to talk over phone or video. An administration panel is present, where the webmaster can create and preview unlimited forms. 
+This plugin allows a webmaster to easily create and add contact forms to WordPress. The contact form will let the user send emails to a site's admin. An administration panel is present, where the webmaster can create and preview unlimited forms. 
 
-Features: easy form edit, multiple forms, confirmation emails, no templates to mess with, and an option to redirect visitors to any URL after the message is sent. Includes CAPTCHA and Akismet support to block spammers. Spam is no longer a problem. You can add extra fields of any type: text, textarea, checkbox, checkbox-multiple, radio, select, select-multiple, attachment, date, time, hidden, password, and fieldset.
+Features a super easy admin panel, multi-form feature, autoresponder, no templates to mess with, and an option to redirect visitors to any URL after the message is sent. Includes CAPTCHA and Akismet support to block all common spammer tactics. Spam is no longer a problem. You can add extra fields of any type: text, textarea, checkbox, checkbox-multiple, radio, select, select-multiple, attachment, date, time, hidden, password, and fieldset.
 
 * [FastSecureContactForm.com](http://www.fastsecurecontactform.com/)
 * [Download WordPress Plugin Version](http://downloads.wordpress.org/plugin/si-contact-form.zip)
@@ -22,12 +22,6 @@ Features: easy form edit, multiple forms, confirmation emails, no templates to m
 = Help Keep This Plugin Free =
 
 If you find this plugin useful to you, please consider [__making a small donation__](http://www.fastsecurecontactform.com/donate) to help contribute to my time invested and to further development. Thanks for your kind support! - [__Mike Challis__](http://profiles.wordpress.org/users/MikeChallis/)
-
-= Good news! A major update is being worked on =
- 
-The Fast Secure Contact Form 4.0 project began in late August 2012 and is making great progress. Read about the changes here:
-[Fast Secure Contact Form 4.0 project reports](http://wordpress.org/support/topic/fast-secure-contact-form-40-project-reports). 
-How you can help with the new 4.0 verion: [Donate to the project](http://www.fastsecurecontactform.com/donate), and/or contribute your ideas in the [Working on a 4.0 Version](http://wordpress.org/support/topic/working-on-a-40-version) post.
 
 Features:
 --------
@@ -40,7 +34,7 @@ Features:
  * Supports sending mail to multiple departments.[See FAQ](http://www.fastsecurecontactform.com/tip-form-preview)
  * Optional - redirect to any URL after message sent.
  * Optional - posted data can be sent as a query string on the redirect URL. [See faq](http://www.fastsecurecontactform.com/sending-data-by-query-string)
- * Optional - confirmation E-mail message.[See FAQ](http://www.fastsecurecontactform.com/tip-add-email-autoresponder)
+ * Optional - autoresponder E-mail message.[See FAQ](http://www.fastsecurecontactform.com/tip-add-email-autoresponder)
  * Valid coding for HTML, XHTML, HTML STRICT, Section 508, and WAI Accessibility.
  * Uses simple inline error messages.
  * Reloads form data and warns user if user forgets to fill out a field.
@@ -54,19 +48,10 @@ Features:
  * Pre-fill in form fields from a URL query string. [See FAQ](http://www.fastsecurecontactform.com/query-string-parameters)
  * Save emails to the WordPress database, or export to CSV or Excel. [See FAQ](http://www.fastsecurecontactform.com/save-to-database)
  * I18n language translation support. [See FAQ](http://www.fastsecurecontactform.com/how-to-translate)
- 
-Scheduling, Meeting and Payments via vCita:
--------------------------------------------
- * Offer visitors to Schedule Meetings as part of your Contact Form
- * Set your availability and synchronize your contact form with your Google calendar
- * Meet online with web-based video meeting room
- * Meet over phone conference
- * Record your meetings
- * Collect payments and bill for your time and services
- * Send a payment request once a meeting is completed or secure a fee in advance according to your hourly rate
 
 Security:
----------
+--------
+ * It has very tight security, stops all automated spammers.
  * Akismet spam protection support.
  * Spam checks E-mail address input from common spammer tactics...
 prevents spammer forcing to:, cc:, bcc:, newlines, and other E-mail injection attempts to spam the world.
@@ -74,19 +59,19 @@ prevents spammer forcing to:, cc:, bcc:, newlines, and other E-mail injection at
  * Filters all form inputs from HTML and other nasties.
  * E-mail message footer shows blog username(if logged on), Date/Time timestamp, IP address, and user agent (browser version) of user who contacted you.
 
-CAPTCHA Image Support:
+Captcha Image Support:
 ---------------------
  * Uses Open-source free PHP CAPTCHA library by www.phpcaptcha.org (customized version included)
  * Abstract background with multi colored, angled, and transparent text
  * Arched lines through text
- * Refresh button to reload CAPTCHA
- * CAPTCHA can be disabled on form edit page
+ * Refresh button to reload captcha if you cannot read it
+ * CAPTCHA can be disabled in Options
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 3.4.2+ and WPMU (Wordpress 3.5+ is highly recommended)
+ * Works with Wordpress 2.8+, WPMU, and BuddyPress (Wordpress 3.0+ is highly recommended)
  * PHP5 
- * PHP register_globals and safe_mode MUST be set to "Off".
+ * PHP register_globals and safe_mode should be set to "Off".
 
 == Installation ==
 
@@ -126,6 +111,7 @@ Requirements/Restrictions:
 
 [See FAQ page: How to troubleshoot email delivery](http://www.fastsecurecontactform.com/email-does-not-send)
 
+
 = Is this plugin available in other languages? =
 
 Yes. To use a translated version, you need to obtain or make the language file for it.
@@ -143,7 +129,7 @@ The following translations are included in the download zip file:
 * French (fr_FR) - Translated by [Pierre Sudarovich](http://pierre.sudarovich.free.fr/)
 * German (de_DE) - Translated by [Sebastian Kreideweiss](http://sebastian.kreideweiss.info/)
 * Greek (el) - Translated by [Ioannis](http://www.jbaron.gr/)
-* Hebrew, Israel (he_IL) - Translated by Asaf Chertkoff FreeAllWeb GUILD
+* Hebrew, Israel (he_IL) - Translated by [Asaf Chertkoff FreeAllWeb GUILD](http://web.freeall.org) 
 * Hungarian (hu_HU) - Translated by [Jozsef Burgyan](http://dmgmedia.hu)
 * Italian (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
 * Japanese (ja) - Translated by [Ichiro Kozuka]
@@ -152,7 +138,7 @@ The following translations are included in the download zip file:
 * Portuguese (pt_PT) - Translated by [AJBFerreira Blog](http://pws.op351.net/)
 * Portuguese Brazil (pt_BR) - Translated by [Rui Alao]
 * Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)
-* Russian (ru_RU) - Translated by [Iflexion](http://www.iflexion.com/)
+* Russian (ru_RU) - Translated by [Bezraznizi](http://www.sprestij.ru/)
 * Spanish (es_ES) - Translated by [Valentin Yonte Rodriguez](http://www.activosenred.com/)
 * Swedish (sv_SE) - Translated by [Daniel Persson](http://walktheline.boplatsen.se/)
 * Traditional Chinese, Taiwan (zh_TW) - Translated by [Cjh]
@@ -162,7 +148,7 @@ The following translations are included in the download zip file:
 
 = Can I provide a translation? =
 
-Yes! 
+Of course! 
 How to translate Fast Secure Contact Form for WordPress
 http://www.fastsecurecontactform.com/how-to-translate
 
@@ -196,175 +182,7 @@ No setting necessary, it just works.
 
 For more help... [See the official FAQ at FastSecureContactForm.com](http://www.fastsecurecontactform.com/faq-wordpress-version)
 
-= What is the "Set a meeting" option I have in my form? = 
-
-You can extend your contact form to let your users to Schedule Meetings based on your availability, meet online with web-based video, talk over phone conference, and collect payments for your time and services.
-
-You can enable this option in "Accept Meeting Requests" section at contact form settings page.
-You can then configure your meeting preferences, set your availability and more by activating your free vCita account (again at the contact form settings).
-
-You can learn more about vCita at [www.vcita.com](http://www.vcita.com?invite=FSContact)
-If you have any question about the Schedule Meetings feature please contact support@vcita.com
-
 == Changelog ==
-
-= 3.1.8.5 =
-- (18 Jul 2013) - added new settings: "Submit button input attributes" and "Form action attributes". These can be used for Google Analytics tracking code.
-- added captcha font randomization.
-- fixed date does not have to be required.
-- fixed date error message translation.
-
-= 3.1.8.4 =
-- (07 Jul 2013) - Fixed CAPTCHA PHP warning on some servers.
-- Added better date input validation.
-
-= 3.1.8.3 =
-- (26 Jun 2013) - Fixed form Error messages wrapped in required styling + error styling.
-- Fixed allow \n for new line in textarea defaults.
-- Fixed the date field did not retain the value if there is a submit error.
-- Fixed so if redirect seconds are set to 0, use wp_redirect instead of reloading the page with a meta refresh.
-- Some code cleanup.
-
-
-= 3.1.8.2 =
-- (01 Apr 2013) - switched back to PHP sessions because WP Sessions had issues with cache plugins.
-- Fixed some forms sometimes blanked on Submit.
-- Fixed error logic for attachment permissions.
-- Fixed form posting issues caused by cached pages and session timeout issues.
-- Fixed sometimes missing values for select-multiple field type.
-- Fixed CAPTCHA did not work on some servers.
-- Fixed sometimes error in backup tool.
-
-
-= 3.1.8.1 =
-- (02 Feb 2013) - Fixed multiple forms on same page was broken.
-- fixed ReferenceError: VC_FSCF_set_cookie is not defined.
-
-= 3.1.8 =
-- (30 Jan 2013) - removed PHP sessions and replaced with a built-in WP session method: WP Session Manager by Eric Mann.
-- added border formatting of HTML email where it displays user info.
-
-= 3.1.7.3 =
-- (27 Jan 2013) - fix passing Passing query string parameters to contact form page feature.
-- fix Notice: Undefined variable: ctf_redirect_enable.
-- change to securimage_ctf class name for CAPTCHA.
-
-= 3.1.7.2 =
-- (19 Jan 2013) - fix a parse error when akismet is enabled.
-- fix error when the  form is called from PHP shortcode method.
-- display a more helpful error when checkbox is not configured properly.
-
-= 3.1.7.1 =
-- (18 Jan 2013) - fix a few critical errors such as "illegal characters in POST", Notice: Undefined index si-contact-form.php on line 1016, and users cannot send the form a 2nd time.
-
-= 3.1.7 =
-- (17 Jan 2013) - major fix for compatibility with JetPack, SFC Like, and other plugins that modify "The content".
-- fixed all "Could not read CAPTCHA token file" errors.
-- fixed redirect not working when other plugins modify "The content".
-- fixed "Your message has been sent" message not displaying when other plugins modify "The content".
-- fixed vCita cookie was setting even if vCita is disabled.
-- fixed some false "Invalid Input" errors on form input sanitization.
-- PHP sessions are utilized and required now.
-- removed the CAPTCHA temp folder since PHP sessions are always used now.
-- PHP session cookie now uses HTTPOnly mode for better security (PHP 5.2.0 and up) 
-- added click back button and send again prevention trap, when you try to do that, it will show a blank form.
-- changed message sent redirect from javascript to meta refresh in HTML header.
-- removed the last of the CAPTCHA audio code.
-- removed the setting "Use captcha without PHP session".
-- other bug fixes.
-
-= 3.1.6.3 =
-- (09 Jan 2013) - fixed message sent HTML when redirect is disabled.
-
-= 3.1.6.2 =
-- (08 Jan 2013) - fixed redirect query vars bug caused by 3.1.6.1
-- fixed a couple PHP errors caused by 3.1.6.1
-- fixed some field labels had a semicolon outside of the translatable text.
-- fixed styles left required indicator alignment.
-- fixed to allow HTML in "Required field indicator" setting.
-- added redirect message is inside a border when form border is enabled.
-- added new setting "CSS style for redirecting message".
-- added more help links for css settings on form edit page.
-- required field indicators are now styled by the setting "CSS style for required field text", so now it controls both the message and the indicators the same.
-
-= 3.1.6.1 =
-- (06 Jan 2013) - added new setting "Enable honeypot spambot trap". Enables empty field and time based honyepot traps for spam bots. For best results, do not enable unless you have a spam bot problem. Does not stop human spammers, Akismet should be enabled for that.
-- Many security improvements and code cleanup.
-- Autoresponder email is renamed to Confirmation email.
-- Border label can now be disabled by deleting the "Border label" setting.
-- Removed geekmail mail send function, you can still use WordPress or PHP.
-- Email field is now type=text instead of type=email because too many themes did not style for it. Version 4.0 will have an option to select this.
-
-= 3.1.6 =
-- (23 Dec 2012) - fix form action URL is now compatible with qtranslate plugin with multi-lingual pages, so the correct /de/ /en/ language url is used.
-- fixed checkbox-multiple alignment issue on some themes. 
-
-= 3.1.5.8 =
-- (11 Dec 2012) - added announcement about the Fast Secure Contact Form 4.0 project.
-
-= 3.1.5.7 =
-- (04 Dec 2012) - Fix uninitialized error on vCita code. 
-- Powered by link will open in new window. 
-- Added support for Fast Secure Contact Form Newsletter plugin addon.
-- Use correct comment_type = contact-form for Akismet API call.
-- Improve visual style of rating stars. 
-
-= 3.1.5.6 =
-- (03 Nov 2012) - Fix HTML entity problem in multiple email list. 
-
-= 3.1.5.5 =
-- (06 Aug 2012) - Fix so permissions of the captcha temp folder is not changed.
-
-= 3.1.5.4 =
-- (12 May 2012) - Better detection of checkbox config errors.
-
-= 3.1.5.3 =
-- (11 Apr 2012) - vCita message dismiss feature.
-- put # for the redirect URL and it will redirect to the same page the form is on regardless of the page.
-
-= 3.1.5.2 =
-- (02 Apr 2012) - Fixed hidden shortcode settings broken since version 3.1.5
-
-= 3.1.5.1 =
-- (20 Mar 2012) - removed message "You still haven't completed your Meeting Scheduler settings." on admin pages.
-
-= 3.1.5 =
-- (20 Mar 2012) - vCita improved so your email address is not sent to VCita unless you type it in yourself when activating the service.
-- Email parameter removed from vCita banner URL.
-- Added shortcode setting to show Form Page URL in the email message [si-contact-form form='1' hidden='form_page=1']
-
-= 3.1.4.1 =
-- (24 Feb 2012) - Email will only be passed to vCita servers when you choose to enable vCita services. 
-
-= 3.1.4 =
-- (23 Feb 2012) - Fix bug in Extra field tags can be used in subject setting.
-- Fix possible error: preg_match() expects parameter to be string. 
-- Fix to use separate CC: email header.
-- vCita improvements.
-- Updated Russian (ru_RU) - Translated by [Iflexion](http://www.iflexion.com/)
-
-= 3.1.3.1 =
-- (05 Feb 2012) - Fix vCita had some uninitialized variable errors when debugging is on.
-
-= 3.1.3 =
-- (04 Feb 2012) - Extra field tags can be used in subject setting. For available field tags, click 'help' next to the 'E-mail Subject Prefix:' setting.
-- Fix vCita could not be disabled during invalid email condition.
-- Fix JS on form edit preview page.
-
-= 3.1.2 =
-- (25 Jan 2012) - Use WP function is_ssl() for better SSL compatibility.
-- Fix vCita 'JS on every page' bug in admin and WP site.
-- Fix vCita had some output when disabled.
-- Fix calendar week number bug.
-
-= 3.1.1 =
-- (21 Jan 2012) - Updated vCita functions and added new schedule a meeting buttons. 
-- Replace the use of WP_PLUGIN_URL with plugins_url() for better SSL compatibility.
-- Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
-
-= 3.1 =
-- (06 Dec 2011) - Add "Set a meeting" option to your contact form using vCita Meeting Scheduler. Meet users over video or phone, and collect payment for services.
-- Improved HTML code on message sent.
 
 = 3.0.5 =
 - (18 Nov 2011) - Harden security for CAPTCHA by limiting the number of created cache files. This condition could only be realized with a script. Found by [Brian St. Pierre](http://bstpierre.org/).
