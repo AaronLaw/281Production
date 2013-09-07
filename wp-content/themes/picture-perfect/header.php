@@ -73,7 +73,7 @@
 
 <div id="imageMenuIcon">
 	<!--<a href="<?php echo site_url('/'); ?>"  title="Home"><img src="<?php echo $url; ?>/img/icon_home.jpg" /></a>-->
-	<a href="<?php echo site_url('video'); ?>"  title="Video"><img src="<?php echo $url; ?>/img/icon_video.png" /></a>
+	<a href="<?php echo('http://vimeo.com/281production/'); ?>"  title="Video"><img src="<?php echo $url; ?>/img/icon_video.png" /></a>
 	<a href="<?php echo('http://www.facebook.com/281photo'); ?>"  title="281 Photo on Facebook"><img src="<?php echo $url; ?>/img/icon_facebook.png" /></a>
 	<a href="<?php echo site_url('address'); ?>"  title="Address"><img src="<?php echo $url; ?>/img/icon_map.png" /></a>
 	<a href="<?php echo site_url('about-281'); ?>"  title="281 阿一"><img src="<?php echo $url; ?>/img/icon_281sky.png" /></a>
