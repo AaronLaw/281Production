@@ -44,8 +44,9 @@
 
 <?php 	$replacethese = array('[',']');
 		$replacewith = array('<span id="middleword">','</span>');
-		echo str_replace($replacethese, $replacewith, get_bloginfo('title')); ?>
-		</a></h1>
+		?><?php//echo str_replace($replacethese, $replacewith, get_bloginfo('title')); // Logo only ?>
+		<img src="/weblog/wp-content/themes/picture-perfect/img/281production_logo_120x110.png" /> <!--2013-08-12: add a logo-->
+</a></h1>
 		<div id="description"><?php bloginfo('description'); ?></div>
 </div>
 	

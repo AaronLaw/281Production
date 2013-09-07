@@ -4,14 +4,15 @@
 	overflow: hidden;
 	background-color: #000;
 	border-style: none;
-  height: 708px;             /*overall container height*/
+  	height: 708px;             /*overall container height*/
 	float: left;
 	text-align: left;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	left: 24px;
 	position: fixed;
-	top: 45px;
+	/*top: 45px;*/ /*2013-08-12: with :::281Sky::: text*/
+	top: 160px; /*120px+40px, where 120 is Logo height, 40 is top position*/
 	margin: 0;
 	padding: 0;
 }
@@ -19,17 +20,26 @@
 #imageMenuIcon {		/* add 2012-01-03: by Aaron. To fix the problem of not-slideable after adding the Icons in the Menu.*/
 	width: 250px;         /*overall image container width*/
 	overflow: hidden;
-	background-color: #000;
+	#background-color: #000;
 	border-style: none;
-  #height: 708px;             /*overall container height*/
+    height: 70px;             /*overall container height*/
 	float: left;
 	text-align: left;
+
+	/* 2012-05-04: as of showing a red line /
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
-	border-bottom-color: #f33;
+	border-bottom-color: #f33;*/
+
 	left: 24px;
 	position: fixed;
-	top: 755px;
+	top: 875px; /*controls the top of the "5 icons" which sits below the IAMGE MENU*/
+	/*120+40+708=868pxw where 120 is Logo height, 40 is top position, 708 is imageMenu height*/		
+	margin: 0;
+	padding: 0;
+}
+
+#imageMenuIcon img{ /*add 2013-08-12 by aaron. Fine control of the 5 icons*/
 	margin: 0;
 	padding: 0;
 }
@@ -58,8 +68,14 @@
 	overflow:hidden;
 	width:240px;				/*image width*/
 	height: 100px;
-	font-weight: inherit;	font-style: inherit;	font-size: 100%;	font-family: inherit;	vertical-align: baseline;
-		font-weight: bold;	font-size: 24px;	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+		font-weight: bold;
+	font-size: 24px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	color: white;
 	text-align: left;
 	text-indent: 10px;
@@ -72,7 +88,7 @@
 
 
 
-
+/*the pictures inside the Image Menu*/
 #imageMenu ul li.bk1 a {
 	background: url(images/1.jpg) repeat scroll ;
 }

@@ -17,8 +17,11 @@ body {
 	text-align: center;
 	color: #fff;
 	font-family: "Lucida Grande",Tahoma,"Lucida Sans Unicode",Verdana,sans-serif;
+
 	background-color: #000;
-	#background-image:url('');
+	background-image:url('img/Background_Ornaments.jpg');
+	background-attachment:fixed; /*just make the background image fixed (Google:css how to fix background image)*/
+
 	 min-width:1024px; 
 }
 
@@ -39,13 +42,13 @@ body a:hover{
 }
 
 #wrapper {
-	
-text-align: left;
-position: relative;
+	text-align: left;
+	position: relative;
 	margin: 0px auto 0;
 	width: auto;
 }    
 
+/*:::281Sky:::*/
 #welcomeheading a {
 	margin-bottom: 10px;
 	padding-bottom: 15px;
@@ -60,13 +63,20 @@ position: relative;
 	position: fixed; /* 2012-05-04: replace "position: absolute;" for making menu */
 	margin-left: 24px;
 	margin-right: 0;
-	/* 2012-05-04: as of showing a red line */
+
+	/* 2012-05-04: as of showing a red line /
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #f33;
-	padding-bottom: 2px;
+	padding-bottom: 2px; */
+
 	width: 240px;
-	height: 35px;
+	/*height: 35px;*/ /*2013-08-12: with :::281Sky::: text*/
+	
+	/*2013-08-12: to repace :::281Sky::: text with Logo*/
+	height: 120px;
+	top: 40px
+
 }
 
 #welcomeheading a:hover {
@@ -98,6 +108,9 @@ position: relative;
 	float: none;
 	padding-top: 20px;
 	display: block;
+
+
+
 }
 
 	#content .notice p {
@@ -389,7 +402,7 @@ float: left;
 	text-align: left;
 	margin-right: 20pt;
 	padding-top: 100px;
-	display: inline;
+	#display: inline;
 } 
 
 #sidebar li{
